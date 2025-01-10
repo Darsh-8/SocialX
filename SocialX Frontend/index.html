@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>SocialX</title>
+    <link rel="icon" href="./img/flash.png" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="loading-screen">
+        <div class="loader">
+            <div class="loader-content">
+                <span class="loader-text">SocialX</span>
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+    <div class="cursor"></div>
+    <nav class="navbar">
+        <div class="logo">
+            <span>⚡</span>
+            <span>SocialX</span>
+        </div>
+        <!-- Navigation Links 
+        <div class="nav-links">
+            <a href="#">Key Features</a>
+            <a href="#">Explore</a>
+            <a href="#">Solutions</a>
+            <a href="#">Tools</a>
+            <a href="#">Contact</a>
+        </div>-->
+        <a href="#" class="signup-btn">Contact Us</a>
+    </nav>
+
+    <main id="hero-cover">
+        <div id="hero-container">
+            <div class="flash-icon"><img src="./img/flash.png" alt=""></div>
+            <div>
+                <span class="text1">Analytics</span>
+                <div class="growicon"><img src="./img/rise.png" alt=""></div>
+                <br>
+                <span class="text2">that <span style="color: #a1a1a1; font-weight: 500;">help</span> you</span>
+                <br>
+                <div class="shape-future-container">
+                    <span class="text3">shape</span>
+                    <span class="audio-waves"><img src="./img/audio-waves.png" alt=""></span>
+                    <span class="text4">the future</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Chatbot Button -->
+    <div class="chatbot-trigger">
+        <span class="chatbot-icon">💬</span>
+        <span class="chatbot-help-bubble">Need Help? Ask Me!</span>
+    </div>
+
+    <!-- Chatbot Interface -->
+    <div class="chatbot-overlay">
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-header-title">
+                    <h3>Chat with us</h3>
+                    <p>We typically reply within a few minutes</p>
+                </div>
+                <button class="chatbot-close">×</button>
+            </div>
+            <div class="chatbot-messages"></div>
+            <div class="chatbot-input-container">
+                <textarea class="chatbot-input" placeholder="Type your message here..." rows="1"></textarea>
+                <button class="chatbot-send">
+                    <span>Send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

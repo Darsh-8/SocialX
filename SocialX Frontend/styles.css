@@ -1,0 +1,1256 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* styles.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Urbanist", serif;
+  cursor: none !important;
+  /* Force no cursor on all elements */
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1a1a1a;
+  border-radius: 15px;
+  margin: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup-btn {
+  background-color: white;
+  color: #1a1a1a;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.hero-icons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.icon-primary {
+  background-color: #ff5733;
+  color: white;
+}
+
+.icon-secondary {
+  background-color: #f0f0f0;
+}
+
+.text-container {
+  justify-content: left;
+  text-align: left;
+  font-size: 5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.grey-text {
+  color: #d3d3d3;
+}
+
+.yellow-dot {
+  width: 100px;
+  height: 100px;
+  padding: 100px;
+  color: #ffd700;
+}
+
+.dashboard-preview {
+  max-width: 800px;
+  width: 100%;
+  margin: 2rem auto;
+  transform: perspective(1000px) rotateY(10deg);
+  transition: transform 0.3s ease;
+}
+
+.dashboard-preview:hover {
+  transform: perspective(1000px) rotateY(0deg);
+}
+
+.chatbot-trigger {
+  position: fixed;
+  bottom: 2rem;
+  right: 3rem;
+  width: 60px;
+  height: 60px;
+  background-color: #ff5733;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  /* Vertically centers the icon */
+  justify-content: center;
+  /* Horizontally centers the icon */
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  z-index: 1001;
+}
+
+.chatbot-trigger:hover {
+  transform: scale(1.1);
+}
+
+
+.chatbot-icon {
+  font-size: 24px;
+  color: white;
+  margin-left: 140px;
+  /* Adjust the margin to move the icon slightly to the right */
+}
+
+.chatbot-help-bubble {
+  position: fixed;
+  bottom: 60px;
+  /* Adjust for correct vertical spacing above the button */
+  right: 90px;
+  /* Align the help bubble with the button */
+  background-color: #ff5733;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  text-align: center;
+  z-index: 1000;
+
+  /* Tail below the bubble */
+  position: relative;
+}
+
+.chatbot-help-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  /* Positioned just below the bubble */
+  left: 50%;
+  /* Center tail horizontally */
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #ff5733;
+  /* Matches bubble background */
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.chatbot-help-bubble {
+  animation: bounce 2s infinite ease-in-out;
+}
+
+
+
+.hidden {
+  display: none;
+}
+
+.chatbot-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.chatbot-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  z-index: 1002;
+  margin-left: 20px;
+  border-radius: 1rem;
+  /* Added this line to round all corners */
+  overflow: hidden;
+  /* Added to ensure content doesn't overflow rounded corners */
+}
+
+.chatbot-header {
+  padding: 1.5rem;
+  background-color: #1a1a1a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbot-header-title h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.chatbot-header-title p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.chatbot-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.chatbot-messages {
+  flex-grow: 0.9;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fafafa;
+}
+
+.message {
+  max-width: 70%;
+  padding: 1rem;
+  border-radius: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.message.user {
+  background-color: #ff5733;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.message.bot {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+  align-self: flex-start;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.chatbot-input-container {
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  background-color: #f9f9f9;
+  position: sticky;
+  bottom: 0;
+  z-index: 1003;
+}
+
+.chatbot-input {
+  flex-grow: 1;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-family: inherit;
+  font-size: 1rem;
+  max-height: 150px;
+  height: auto;
+  overflow-y: hidden;
+  resize: none;
+  outline: none;
+  transition: height 0.2s ease;
+}
+
+.chatbot-input:focus {
+  overflow-x: auto;
+}
+
+.chatbot-input:valid {
+  overflow-x: auto;
+}
+
+.chatbot-send {
+  background-color: #ff5733;
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-send:hover {
+  background-color: #ff4719;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .chatbot-container {
+    margin-right: 25px;
+    width: 600px;
+    height: 90vh;
+    max-height: 800px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    margin-left: 20px;
+  }
+
+  .chatbot-header {
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .chatbot-input-container {
+    border-radius: 0 0 1rem 1rem;
+    /* Added this line to round bottom corners */
+  }
+}
+
+@media (max-width: 768px) {
+  .text-container {
+    font-size: 3rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .chatbot-container {
+    width: 100%;
+    height: 100%;
+    max-height: -webkit-fill-available;
+    border-radius: 0;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .chatbot-messages {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding-bottom: 100px;
+  }
+
+  .chatbot-input-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    min-height: 64px;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  .chatbot-input {
+    max-height: 100px;
+  }
+
+  .chatbot-overlay {
+    height: 100vh;
+    height: -webkit-fill-available;
+    position: fixed;
+    overflow: hidden;
+  }
+}
+
+/* Add these styles for the liquid cursor */
+.cursor {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 87, 51, 0.8);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: all 0.1s ease-out;
+  filter: blur(0.5px);
+}
+
+.cursor::before {
+  display: none;
+}
+
+/* Update hover effects */
+a:hover~.cursor,
+button:hover~.cursor {
+  transform: translate(-50%, -50%) scale(5);
+  background-color: rgba(255, 87, 51, 0.6);
+}
+
+/*Main Container*/
+#hero-cover {
+  display: flex;
+  position: absolute;
+  left: 60%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  z-index: 1;
+  padding: 0 2rem;
+}
+
+#hero-container {
+  font-size: 8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.text1 {
+  background: linear-gradient(45deg, #1a1a1a, #333);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  margin-left: 20rem;
+}
+
+.text2 {
+  opacity: 0.9;
+  margin-left: -15rem;
+}
+
+.text3 {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(45deg, #666, #999);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 0.5rem;
+}
+
+.text4 {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(45deg, #ff5733, #ff8c1a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left: -2rem;
+}
+
+.flash-icon {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #f5f5f5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.1),
+    inset 5px 5px 15px rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flash-icon::before {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: linear-gradient(45deg,
+      transparent,
+      rgba(255, 255, 255, 0.8),
+      transparent);
+  transform: translateX(-100%);
+  animation: shine 3s infinite;
+}
+
+.flash-icon:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.1),
+    inset 5px 5px 15px rgba(255, 255, 255, 0.8);
+}
+
+.flash-icon img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.growicon {
+  display: flex;
+  position: absolute;
+  left: 3rem;
+  top: 1rem;
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+  background-color: #ff5733;
+  border-radius: 50%;
+  box-shadow: 0 8px 32px rgba(255, 87, 51, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.growicon:hover {
+  transform: scale(1.1);
+}
+
+.growicon img {
+  margin: auto;
+  filter: invert(1);
+  width: 55px;
+  height: auto;
+}
+
+.audio-waves {
+  position: relative;
+  display: inline-flex;
+  width: 120px;
+  height: 120px;
+  vertical-align: middle;
+  margin: 0 0.5rem;
+  transform: translateY(-10px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffe566, #bdbaa9);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.1),
+    inset 5px 5px 15px rgba(145, 129, 129, 0.4);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.audio-waves::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  background: conic-gradient(from 0deg,
+      transparent 0deg,
+      #ffd700 120deg,
+      transparent 180deg);
+  animation: rotate 3s linear infinite;
+}
+
+.audio-waves::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: radial-gradient(circle at 30% 30%, #ffe566, #ffd700);
+  border-radius: 50%;
+  box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.audio-waves:hover {
+  transform: rotate(15deg) scale(1.05);
+  box-shadow: 0 15px 45px rgba(255, 215, 0, 0.4),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.1),
+    inset 5px 5px 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Add these new keyframe animations */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+
+  20%,
+  100% {
+    transform: translateX(150%) rotate(45deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Add pulse effect for images inside icons */
+.flash-icon img,
+.audio-waves img {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.flash-icon {
+  left: 8rem;
+  top: 1rem;
+}
+
+.audio-waves {
+  top: 0rem;
+}
+
+.audio-waves img {
+  left: 0.3rem;
+  top: 0.3rem;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Add hover effects for images */
+.flash-icon:hover img {
+  animation: shake 0.5s ease-in-out;
+}
+
+.audio-waves:hover img {
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Add responsive styles */
+@media (max-width: 1200px) {
+  #hero-cover {
+    max-width: 900px;
+  }
+
+  #hero-container {
+    font-size: 5rem;
+  }
+
+  .text2,
+  .text3 {
+    font-size: 4.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #hero-cover {
+    max-width: 600px;
+    padding: 0 1.5rem;
+    top: 45%;
+    /* Adjust for better mobile viewing */
+  }
+
+  #hero-container {
+    font-size: 3.5rem;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .text2,
+  .text3 {
+    font-size: 3rem;
+  }
+
+  /* Adjust icon positions for centered layout */
+  .flash-icon {
+    left: -3rem;
+    transform: scale(0.8);
+  }
+
+  .growicon {
+    left: 16rem;
+    top: 1rem;
+    transform: scale(0.8);
+  }
+
+  .audio-waves {
+    right: -3rem;
+    top: -2rem;
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  #hero-cover {
+    left: 50%;
+    top: 40%;
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+
+  #hero-container {
+    font-size: 2.8rem;
+    text-align: center;
+    padding: 0;
+  }
+
+  .text3 {
+    margin-top: -10rem;
+  }
+
+  .text4 {
+    font-size: 5rem !important;
+    line-height: 4.5rem;
+    margin-top: -4rem;
+  }
+
+  /* Adjust icon positions */
+  .flash-icon {
+    position: absolute;
+    margin-left: 3rem;
+    margin-top: -12rem;
+    transform: scale(0.5);
+  }
+
+  .growicon {
+    position: absolute;
+    margin-right: 2rem;
+    margin-top: -10rem;
+    transform: scale(0.5);
+  }
+
+  .audio-waves {
+    margin-top: -4rem !important;
+    margin-left: -3rem !important;
+    display: inline-flex;
+    width: 100px !important;
+    height: 75px !important;
+    border-radius: 50% !important;
+    transform: translateY(-5px) scale(0.8);
+  }
+
+  /* Container for shape the future text */
+  .shape-future-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -10rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  #hero-cover {
+    top: 35%;
+  }
+
+  #hero-container {
+    font-size: 2.3rem;
+  }
+
+  .text1,
+  .text2,
+  .text3,
+  .text4 {
+    font-size: 2.2rem;
+  }
+
+  .audio-waves {
+    width: 35px;
+    height: 35px;
+    transform: translateY(-3px) scale(0.7);
+  }
+}
+
+/* Update audio-waves image styles for consistency */
+.audio-waves img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  margin: auto;
+}
+
+/* Hide default cursor on specific interactive elements */
+a,
+button,
+input,
+textarea {
+  cursor: none !important;
+}
+
+/* Show default cursor only on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  .cursor {
+    display: none !important;
+  }
+}
+
+/* Update responsive styles for audio waves */
+@media (max-width: 768px) {
+  .audio-waves {
+    width: 60px;
+    height: 60px;
+    margin: 0 0.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .audio-waves {
+    width: 40px;
+    height: 40px;
+    margin: 0 0.2rem;
+  }
+}
+
+/* Desktop styles (unchanged) */
+@media screen and (min-width: 1024px) {
+  #hero-container {
+    font-size: 8rem;
+  }
+
+  .text1 {
+    margin-left: 20rem;
+  }
+
+  .text2 {
+    margin-left: -15rem;
+  }
+
+  .flash-icon {
+    left: 8rem;
+    top: 1rem;
+  }
+
+  .growicon {
+    left: 3rem;
+    top: 1rem;
+  }
+
+  .audio-waves {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Tablet styles */
+@media screen and (max-width: 1023px) {
+  #hero-container {
+    font-size: 6rem;
+    text-align: center;
+  }
+
+  .text1 {
+    margin-left: 0;
+  }
+
+  .text2 {
+    margin-left: 0;
+  }
+
+  .flash-icon {
+    left: -3rem;
+    top: 50%;
+    transform: scale(0.8);
+  }
+
+  .growicon {
+    right: -3rem;
+    left: auto;
+    top: 50%;
+    transform: scale(0.8);
+  }
+
+  .audio-waves {
+    width: 90px;
+    height: 90px;
+    transform: translateY(-5px);
+  }
+}
+
+/* Mobile styles */
+@media screen and (max-width: 767px) {
+  #hero-container {
+    font-size: 4rem;
+    padding: 0 1rem;
+  }
+
+  .flash-icon {
+    left: -2rem;
+    transform: scale(0.6);
+  }
+
+  .growicon {
+    right: -2rem;
+    transform: scale(0.6);
+  }
+
+  .audio-waves {
+    width: 60px;
+    height: 60px;
+    margin: 0 0.3rem;
+    transform: translateY(-3px);
+  }
+
+  .text3,
+  .text4 {
+    font-size: 3.5rem;
+  }
+}
+
+/* Small mobile styles */
+@media screen and (max-width: 480px) {
+  #hero-container {
+    font-size: 3rem;
+  }
+
+  .flash-icon {
+    left: -3.5rem;
+    top: 9.5rem;
+    /* Add this to move it down */
+    transform: scale(0.5);
+    position: absolute;
+    /* Ensure positioning works (use relative or absolute as needed) */
+  }
+
+
+  .growicon {
+    right: -3rem;
+    top: 7.rem;
+    transform: scale(0.5);
+  }
+
+  .audio-waves {
+    width: 45px;
+    height: 45px;
+    margin: 0 0.2rem;
+    transform: translateY(-2px);
+  }
+
+  .text3,
+  .text4 {
+    font-size: 2.8rem;
+  }
+}
+
+/* Extra small mobile styles */
+@media screen and (max-width: 360px) {
+  #hero-container {
+    font-size: 2.5rem;
+  }
+
+  .flash-icon {
+    left: -1rem;
+    transform: scale(0.4);
+  }
+
+  .growicon {
+    right: -1rem;
+    transform: scale(0.4);
+  }
+
+  .audio-waves {
+    width: 35px;
+    height: 35px;
+    margin: 0 0.2rem;
+    transform: translateY(-2px);
+  }
+
+  .text3,
+  .text4 {
+    font-size: 2.3rem;
+  }
+}
+
+/* Add loading screen styles */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  transition: opacity 0.5s ease-out;
+  overflow: hidden;
+  /* Add this to contain the grid */
+}
+
+/* Add grid background */
+.loading-screen::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background-image:
+    linear-gradient(#333 1px, transparent 1px),
+    linear-gradient(90deg, #333 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  opacity: 0.5;
+  transform-origin: center;
+}
+
+/* Add glowing effect behind loader */
+.loader::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 87, 51, 0.2), transparent 50%);
+  transform: translate(-50%, -50%);
+  filter: blur(20px);
+  z-index: -1;
+}
+
+.loader {
+  text-align: center;
+}
+
+.loader-content {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  /* Ensure content stays above grid */
+}
+
+.loader-text {
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.loader-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(255, 87, 51, 0.3);
+}
+
+.loader-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff5733, #ff8c1a);
+  animation: loading 5s linear forwards;
+  box-shadow: 0 0 20px rgba(255, 87, 51, 0.5);
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide loading screen after animation */
+.loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Add grid animation */
+@keyframes gridMove {
+  0% {
+    transform: rotate(180deg) translateY(0%);
+  }
+
+  100% {
+    transform: rotate(180deg) translateY(100%);
+  }
+}
+
+/* Add responsive adjustments for grid */
+@media (max-width: 768px) {
+  .loading-screen::before {
+    background-size: 30px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loading-screen::before {
+    background-size: 20px 20px;
+  }
+}
+
+/* Hide icons on non-desktop devices */
+@media screen and (max-width: 1023px) {
+
+  .flash-icon,
+  .growicon,
+  .audio-waves {
+    display: none !important;
+  }
+
+  /* Reset text margins since icons are hidden */
+  .text1 {
+    margin-left: 0;
+  }
+
+  .text2 {
+    margin-left: 0;
+  }
+
+  #hero-container {
+    font-size: 6rem;
+    text-align: center;
+  }
+}
+
+/* You can remove or comment out the icon-specific styles in the following media queries 
+   since they won't be visible anyway */
+
+@media screen and (max-width: 767px) {
+  #hero-container {
+    font-size: 4rem;
+    padding: 0 1rem;
+  }
+
+  .text3,
+  .text4 {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #hero-container {
+    font-size: 3rem;
+  }
+
+  .text3,
+  .text4 {
+    font-size: 2.8rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  #hero-container {
+    font-size: 2.5rem;
+  }
+
+  .text3,
+  .text4 {
+    font-size: 2.3rem;
+  }
+}
